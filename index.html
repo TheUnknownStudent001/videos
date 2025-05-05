@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>K Embed</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>body,html{margin:0;padding:0;height:100%}</style>
+</head>
+<body>
+  <div id="player" style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;"></div>
+
+  <script>
+    // parse `?video=<ID>` from the URL
+    const params = new URLSearchParams(window.location.search);
+    const videoId = params.get('video');
+    if (!videoId) {
+      document.body.innerHTML = '<p style="padding:1em;">No video specified.</p>';
+    } else {
+      const iframe = document.createElement('iframe');
+      iframe.src = 'https://kinescope.io/embed/' + encodeURIComponent(videoId);
+      iframe.allow = 'autoplay; fullscreen; picture-in-picture; encrypted-media; gyroscope; accelerometer; clipboard-write; screen-wake-lock;';
+      iframe.frameBorder = '0';
+      iframe.allowFullscreen = true;
+      iframe.style = 'position:absolute;top:0;left:0;width:100%;height:100%;border:0';
+      document.getElementById('player').appendChild(iframe);
+    }
+  </script>
+</body>
+</html>
